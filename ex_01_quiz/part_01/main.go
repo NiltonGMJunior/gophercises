@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 var problemsFlag = flag.String("problems", "problems.csv", "a csv file in the format of 'question,answer'")
@@ -23,7 +24,7 @@ func main() {
 		fmt.Println(record[0])
 		var answer string
 		fmt.Scanln(&answer)
-		if answer == record[1] {
+		if compareStrings(answer, record[1]) {
 			fmt.Println("Correct!")
 			correctAnswers++
 		} else {
@@ -49,4 +50,12 @@ func readCsvFile(filePath string) [][]string {
 	}
 
 	return records
+}
+
+func normalizeString(s string) string {
+	return strings.TrimSpace(strings.ToLower(s))
+}
+
+func compareStrings(a, b string) bool {
+	return normalizeString(a) == normalizeString(b)
 }
