@@ -8,6 +8,9 @@ import (
 	"strings"
 )
 
+const QUESTION_INDEX = 0
+const ANSWER_INDEX = 1
+
 var problemsFlag = flag.String("problems", "problems.csv", "a csv file in the format of 'question,answer'")
 
 func main() {
@@ -21,10 +24,10 @@ func main() {
 	totalQuestions := len(records)
 	correctAnswers := 0
 	for _, record := range records {
-		fmt.Println(record[0])
+		fmt.Println(record[QUESTION_INDEX])
 		var answer string
 		fmt.Scanln(&answer)
-		if compareStrings(answer, record[1]) {
+		if compareStrings(answer, record[ANSWER_INDEX]) {
 			fmt.Println("Correct!")
 			correctAnswers++
 		} else {
